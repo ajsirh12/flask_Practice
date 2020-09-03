@@ -1,0 +1,3 @@
+import HelloModule
+
+HelloModule.func()
