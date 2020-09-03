@@ -19,11 +19,9 @@ class LoginForm(FlaskForm):
         def __call__(self, form, field):
             userid = form['userid'].data
             password = field.data
-
-            if Fcuser.query.filter_by(userid=userid).first():
-                fcuser = Fcuser.query.filter_by(userid=userid).first()
-                if fcuser.password!=password:
-                    raise ValueError('Wrong Password')
+            fcuser = Fcuser.query.filter_by(userid=userid).first()
+            if fcuser.password!=password:
+                raise ValueError('Wrong Password')
 
     userid = StringField('userid', validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired(), UserPassword()])
